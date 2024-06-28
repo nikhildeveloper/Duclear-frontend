@@ -18,9 +18,7 @@ function History() {
             throw new Error(`HTTP error! status: ${response.status}`)
         }
         const data = await response.json()
-        // if(!data.ok){
-        //   throw new Error(`API returned error! status: ${data.status}`)
-        // }
+
         setHistoryItems(data)
         
       } catch (error) {

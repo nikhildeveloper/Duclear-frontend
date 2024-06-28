@@ -88,8 +88,9 @@ function ExpenseInputForm() {
             src = "https://images.pexels.com/photos/1629212/pexels-photo-1629212.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
             class="absolute inset-0 h-full w-full object-cover opacity-60 blur-sm"
         />
-
+            
         <div class="hidden lg:relative lg:block lg:p-12">
+            
             <a class="block text-white" href="#">
             <span class="sr-only">Home</span>
             <svg
@@ -120,6 +121,7 @@ function ExpenseInputForm() {
         >
             
         <div class="max-w-xl lg:max-w-3xl">
+            
             <div class="relative -mt-16 block lg:hidden">
             <a
                 class="inline-flex size-16 items-center justify-center rounded-full bg-white text-blue-600 sm:size-20"
