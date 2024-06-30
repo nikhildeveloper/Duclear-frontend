@@ -38,19 +38,27 @@
 import React, { useEffect } from 'react'
 import EditExpense from './EditExpense'
 import { useState } from 'react'
+import { useHistory } from '../../contexts/HistoryContext'
 
-
-function RowLog({ item, name, amount, date, action }) {
+function RowLog({ item, name, amount, date, action,detailedLogToggle,expense_id }) {
     const [isEditToggleButton, setisEditToggleButton] = useState(false)
+
+    const history = useHistory()
+     
+    
 
     useEffect(() => {
         
     },[isEditToggleButton])
 
-    const editExpense = () =>{
-        console.log(isEditToggleButton)
-        setisEditToggleButton((prev)=>!prev)
+    const editExpense = (id) =>{
+
+        history.toggleDetailedLog(id)
+        
+        // setisEditToggleButton((prev)=>!prev)
+        
     }
+
 
     return (
 
@@ -75,7 +83,7 @@ function RowLog({ item, name, amount, date, action }) {
             
             <td className="px-6 py-4 text-right">
                 <a className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                onClick={editExpense}
+                onClick={()=>{editExpense(expense_id)}}
                 >Edit</a>
             </td> )}
         </tr>

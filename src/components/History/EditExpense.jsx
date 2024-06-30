@@ -7,7 +7,6 @@ function EditExpense() {
         
     }
 
-
   return (
 
     <div id="toast-danger" class=" z-30 flex items-center w-full max-w-xs p-4 mb-4" role="alert">

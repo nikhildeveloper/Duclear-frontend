@@ -7,7 +7,7 @@ import { HistoryContextProvider } from '../../contexts/HistoryContext';
 function History() {
 
   const [historyItems,setHistoryItems] = useState([])
-
+  
 
   useEffect(()=>{
     const fetchExpenses = async ()=>{
@@ -19,7 +19,15 @@ function History() {
         }
         const data = await response.json()
 
-        setHistoryItems(data)
+
+        const detailToggleAdded = data.map((item)=>{
+          return {
+            ...item,
+            'detailedLogToggle' : false
+          }
+      })
+
+        setHistoryItems(detailToggleAdded)
         
       } catch (error) {
         console.error("Error fetching data: ", error);
@@ -27,14 +35,32 @@ function History() {
     }
     fetchExpenses()
 
-    // const historyFromSession = JSON.parse(localStorage.getItem('expenses'))
-    // if(historyFromSession.length>0){
-    //   setHistoryItems(historyFromSession)
-    // }
+
   },[])
 
+  const toggleDetailedLog = (expenseId)=>{
+     console.log('toggled for ', expenseId)
+     
+    setHistoryItems((prev)=> prev.map((item)=>{
+       
+        if(item._id === expenseId){
+     
+          const updateItem = {
+            ...item,
+            "detailedLogToggle" :!(item.detailedLogToggle)
+          }
+        
+          return updateItem
+        }
+        
+        else{
+          return item
+        }
+    }))
+  }
+
   return (
-    <HistoryContextProvider value={{historyItems}}>
+    <HistoryContextProvider value={{historyItems, toggleDetailedLog}}>
     <LogDisplay/>
     </HistoryContextProvider>
 
