@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import DateInput from './DateInput'
 import FormDropdown from './FormDropdown'
 import { useState } from 'react'
@@ -15,7 +15,9 @@ function ExpenseInputForm() {
     const[itemName, setitemName] = useState("")
     const[Action, setAction] = useState("")
     const[date, setDate] = useState("")
+    const [emailAddress, setEmail] = useState("")
     const [alertToggle, setalertToggle] = useState(false)
+    const [DB_data, setDB_data] = useState([])
     
 
     const storeFormInfo = (e)=>{
@@ -34,42 +36,62 @@ function ExpenseInputForm() {
     const storeActionValue = (a)=>{
         setAction(a)
     }
+    const storeEmail = (e)=>{
+        setEmail(e.target.value)
+    }
     
+    useEffect(()=>{
+        const fetchExpense = async()=>{
+            try {
+                const response = await fetch("http://localhost:8080/getexpenses")
+                if(!response.ok){
+                    throw new Error(`HTTP error! status: ${response.status}`)
+                }
+                const data = await response.json()
+                setDB_data(data)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        fetchExpense()
+    },[])
+
     
     const passText= (e)=>{
         e.preventDefault()
         const itemOne = {
-            item : itemText,
-            amount :itemAmount,
-            date : Date.parse(date),
+
             name : itemName,
-            Action : Action,
+            email : emailAddress,
+            logs : [{
+                item : itemText,
+                amount :itemAmount,
+                date : Date.parse(date),
+                action : Action,
+            }]
         }
-        // entryItem.addExpense(itemOne)
-        // console.log(date)
 
-
-        fetch('http://localhost:8080/sendexpense',{
-            method : 'POST',
-            headers :{
-                'Content-Type' : 'application/json'
-            },
-            body : JSON.stringify(itemOne)
-
-        })
-        .then((res)=>{
-            if(res.ok){
-                setalertToggle((prev)=>!prev)
-                setTimeout(()=>{
-                    setalertToggle(false)
-                }, 3000)
+        const sendExpense = async ()=>{
+            console.log(DB_data)
+            const response = await fetch(`http://localhost:8080/updateexpense/${emailAddress}`,{
+                method : 'PUT',
+                headers :{
+                    'Content-Type' : 'application/json'
+                },
+                body : JSON.stringify(itemOne)
+            })
+            if(!response.ok){
+                throw new Error(`HTTP error! status: ${response.status}`)
             }
-        })
-        .catch((err)=>{
-            console.error('Error:', err)
-        })
+            const data = await response.json()
+
+        }
+
+        sendExpense()
         
-        
+    
+
+
     }
 
     
@@ -181,24 +203,35 @@ function ExpenseInputForm() {
             </div>
 
 
-            <div class="col-span-6 ">
-                <label >
+            <div class="col-span-3 ">
+                <label class="block text-lg font-medium text-gray-700">
                     Date
                 </label>
                 <DateInput/>
             </div>
 
 
-            <div class="col-span-6">
+            <div class="col-span-3">
                 <label  class="block text-lg font-medium text-gray-700"> Name </label>
 
                 <input
-                type="email"
-                id="Email"
-                name="email"
+                type="name"
+                id="Name"
+                name="name"
                 class="mt-1 w-full rounded-md border border-gray-200 bg-white text-lg text-gray-700 shadow-sm p-3"
                 onChange={storeName}
                 />
+            </div>
+            <div class="col-span-6 ">
+                <label class="block text-lg font-medium text-gray-700">
+                    Email
+                </label>
+                <input
+                type="name"
+                id="Name"
+                name="name"
+                class="mt-1 w-full rounded-md border border-gray-200 bg-white text-lg text-gray-700 shadow-sm p-3"
+                onChange={storeEmail} />
             </div>
 
 

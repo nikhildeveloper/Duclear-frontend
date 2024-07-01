@@ -3,6 +3,7 @@
 import React, { useEffect,useState } from 'react';
 import { useExpense } from '../../contexts/ExpenseEntryContext';
 import LogDisplay from './LogDisplay';
+import UserLogDisplay from './UserLogDisplay';
 import { HistoryContextProvider } from '../../contexts/HistoryContext';
 function History() {
 
@@ -18,7 +19,6 @@ function History() {
             throw new Error(`HTTP error! status: ${response.status}`)
         }
         const data = await response.json()
-
 
         const detailToggleAdded = data.map((item)=>{
           return {
@@ -61,7 +61,7 @@ function History() {
 
   return (
     <HistoryContextProvider value={{historyItems, toggleDetailedLog}}>
-    <LogDisplay/>
+    <UserLogDisplay/>
     </HistoryContextProvider>
 
   );

@@ -44,7 +44,7 @@ function DetailedLog({ item, name, amount, date, action, detailedLogToggle, expe
               <div className="grid grid-cols-4 gap-4 py-2">
                 <div className="text-left">{amount}</div>
                 <div className="text-left">500</div>
-                <div className="text-left">{moment(date).format('DD MMM YYYY')}</div>
+                <div className="text-left">{date}</div>
                 
               </div>
             </div>
