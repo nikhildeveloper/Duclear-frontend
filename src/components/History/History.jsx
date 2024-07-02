@@ -40,11 +40,12 @@ function History() {
 
   const toggleDetailedLog = (expenseId)=>{
      console.log('toggled for ', expenseId)
+     console.log()
      
     setHistoryItems((prev)=> prev.map((item)=>{
        
         if(item._id === expenseId){
-     
+          
           const updateItem = {
             ...item,
             "detailedLogToggle" :!(item.detailedLogToggle)

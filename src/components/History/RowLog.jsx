@@ -40,7 +40,7 @@ import EditExpense from './EditExpense'
 import { useState } from 'react'
 import { useHistory } from '../../contexts/HistoryContext'
 
-function RowLog({ item, name, amount, date, action,detailedLogToggle,expense_id }) {
+function RowLog({ name, amount, own, detailedExpense,detailedLogToggle,expense_id }) {
     const [isEditToggleButton, setisEditToggleButton] = useState(false)
 
     const history = useHistory()
@@ -64,20 +64,15 @@ function RowLog({ item, name, amount, date, action,detailedLogToggle,expense_id 
 
         <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
             <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                {item}
+                {name}
             </th>
             <td className="px-6 py-4">
                 {amount}
             </td>
             <td className="px-6 py-4">
-                {date}
+                {own}
             </td>
-            <td className="px-6 py-4">
-                {name}
-            </td>
-            <td className="px-6 py-4">
-                {action}
-            </td>
+
             
             {isEditToggleButton ? (<EditExpense/>) : (
             

@@ -37,15 +37,9 @@ function UserLogDisplay() {
                     owe/owed
                   </th>
                   <th scope="col" class="px-6 py-3">
-                    <div className="flex justify-end gap-4 col-span-1">
-                    <input
-                        type="number"
-                        placeholder="Amount Paid"
-                        className="bg-white-700 p-2 rounded-lg focus:outline-none"
-                    />
-                    <button className="bg-blue-500 p-2 rounded-lg">Paid</button>
-                    </div>
+                    Payment
                   </th>
+
 
                   <th scope="col" class="px-6 py-3">
                       <span class="sr-only">Edit</span>
@@ -56,36 +50,36 @@ function UserLogDisplay() {
               {
                 expenses.map((expense)=>{
 
-                    
+                    const detailedExpenses = expense.logs
+                    // console.log(detailedExpenses)
                     if(expense.detailedLogToggle == false){
                         return <RowLog 
-                        item={expense.item} 
+                         
+                        
                         name ={expense.name} 
-                        amount = {expense.amount}
-                        date = {moment(expense.date).format('dddd, MMMM Do YYYY')} 
-                        action={expense.Action}
-                        detailedLogToggle={expense.DetailLogToggle}
+                        amount = {200}
+                        own = {"own"}
+                        detailedExpense = {detailedExpenses}
                         expense_id = {expense._id}
+                        detailedLogToggle={expense.DetailLogToggle}
                         />
                     }
                     else{
                         
                         return <>
                         <RowLog 
-                        item={expense.item} 
-                        name ={expense.name} 
-                        amount = {expense.amount}
-                        date = {moment(expense.date).format('dddd, MMMM Do YYYY')} 
-                        action={expense.Action}
-                        detailedLogToggle={expense.DetailLogToggle}
-                        expense_id = {expense._id}
+                         name ={expense.name} 
+                         amount = {200}
+                         own = {"own"}
+                         expense_id = {expense._id}
+                         detailedExpense = {detailedExpenses}
+                       detailedLogToggle={expense.DetailLogToggle}
                         />
                         <DetailedLog
-                        item={expense.item} 
                         name ={expense.name} 
-                        amount = {expense.amount}
-                        date = {moment(expense.date).format('dddd, MMMM Do YYYY')} 
-                        action={expense.Action}
+                        amount = {200}
+                        own = {"own"}
+                        detailedExpense = {detailedExpenses}
                         detailedLogToggle={expense.DetailLogToggle}
                         expense_id = {expense._id}
                         />

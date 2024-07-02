@@ -2,13 +2,13 @@ import React, { useEffect } from 'react'
 import DateInput from './DateInput'
 import FormDropdown from './FormDropdown'
 import { useState } from 'react'
-import { useExpense } from '../../contexts/ExpenseEntryContext'
+
 
 import SuccessAlert from './SuccessAlert'
 import { DateContextContextProvider } from '../../contexts/DateContext';
 
 function ExpenseInputForm() {
-    const entryItem = useExpense()
+  
     const [expense, setExpense] = useState({})
     const [itemText, setitemText] = useState("")
     const[itemAmount, setitemAmount] = useState(0)
@@ -88,9 +88,6 @@ function ExpenseInputForm() {
         }
 
         sendExpense()
-        
-    
-
 
     }
 
