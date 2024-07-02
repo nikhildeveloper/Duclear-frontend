@@ -59,6 +59,8 @@ function ExpenseInputForm() {
     
     const passText= (e)=>{
         e.preventDefault()
+        
+        
         const itemOne = {
 
             name : itemName,
@@ -69,22 +71,42 @@ function ExpenseInputForm() {
                 date : Date.parse(date),
                 action : Action,
             }]
+
         }
 
+        const clearFields = ()=>{
+            
+            setitemText("")
+            setitemAmount("")
+            setitemName("")
+            setAction("")
+            setDate("")
+            setEmail("")
+        }
         const sendExpense = async ()=>{
-            console.log(DB_data)
+            console.log('dbdata',DB_data)
+
             const response = await fetch(`http://localhost:8080/updateexpense/${emailAddress}`,{
                 method : 'PUT',
                 headers :{
                     'Content-Type' : 'application/json'
                 },
                 body : JSON.stringify(itemOne)
+
             })
             if(!response.ok){
                 throw new Error(`HTTP error! status: ${response.status}`)
             }
-            const data = await response.json()
+            if(response.status == 200)
+                {
+                    clearFields()
 
+                    setalertToggle((prev)=>!prev)
+                    setTimeout(()=>{
+                        setalertToggle((prev)=>!prev)
+                    },1000)
+
+                }
         }
 
         sendExpense()
@@ -179,6 +201,7 @@ function ExpenseInputForm() {
                 <input
                 type="text"
                 id="ItemName"
+                value={itemText}
                 name="item_name"
                 class="mt-1 w-full rounded-md border border-gray-200 bg-white text-lg text-gray-700 shadow-sm p-3"
                 onChange={storeFormInfo}
@@ -193,6 +216,7 @@ function ExpenseInputForm() {
                 <input
                 type="number"
                 id="Amount"
+                value={itemAmount}
                 name="amount"
                 class="mt-1 w-full rounded-md border border-gray-200 bg-white text-lg text-gray-700 shadow-sm p-3"
                 onChange={storeAmount}
@@ -215,6 +239,7 @@ function ExpenseInputForm() {
                 type="name"
                 id="Name"
                 name="name"
+                value={itemName}
                 class="mt-1 w-full rounded-md border border-gray-200 bg-white text-lg text-gray-700 shadow-sm p-3"
                 onChange={storeName}
                 />
@@ -226,6 +251,7 @@ function ExpenseInputForm() {
                 <input
                 type="name"
                 id="Name"
+                value={emailAddress}
                 name="name"
                 class="mt-1 w-full rounded-md border border-gray-200 bg-white text-lg text-gray-700 shadow-sm p-3"
                 onChange={storeEmail} />

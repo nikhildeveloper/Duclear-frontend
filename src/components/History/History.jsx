@@ -2,12 +2,13 @@
 
 import React, { useEffect,useState } from 'react';
 import { useExpense } from '../../contexts/ExpenseEntryContext';
-import LogDisplay from './LogDisplay';
+
 import UserLogDisplay from './UserLogDisplay';
 import { HistoryContextProvider } from '../../contexts/HistoryContext';
 function History() {
 
   const [historyItems,setHistoryItems] = useState([])
+  const [changes, setChanges] = useState(false)
   
 
   useEffect(()=>{
@@ -36,10 +37,10 @@ function History() {
     fetchExpenses()
 
 
-  },[])
+  },[changes])
 
   const toggleDetailedLog = (expenseId)=>{
-     console.log('toggled for ', expenseId)
+    //  console.log('toggled for ', expenseId)
      console.log()
      
     setHistoryItems((prev)=> prev.map((item)=>{
@@ -60,9 +61,13 @@ function History() {
     }))
   }
 
+  const updateChanges = ()=>{
+    setChanges((prev)=>!prev)
+  }
+
   return (
-    <HistoryContextProvider value={{historyItems, toggleDetailedLog}}>
-    <UserLogDisplay/>
+    <HistoryContextProvider value={{historyItems, toggleDetailedLog, updateChanges}}>
+    <UserLogDisplay />
     </HistoryContextProvider>
 
   );

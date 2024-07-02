@@ -66,12 +66,24 @@ function RowLog({ name, amount, own, detailedExpense,detailedLogToggle,expense_i
             <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                 {name}
             </th>
-            <td className="px-6 py-4">
+            <td className="px-6 py-4 dark:text-white">
                 {amount}
             </td>
-            <td className="px-6 py-4">
+            <td className="px-6 py-4 dark:text-white">
                 {own}
             </td>
+            <div className="flex justify-end gap-4 col-span-1 p-3 dark:text-white">
+                <input
+                type="number"
+                placeholder="Amount Paid"
+                className="bg-gray-700 p-3 rounded-lg focus:outline-none"
+                />
+                <button className="p-3 rounded-lg bg-gray-700 hover:bg-[#74c751] transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105">
+                    Paid
+                </button>
+
+            </div>
+
 
             
             {isEditToggleButton ? (<EditExpense/>) : (

@@ -2,16 +2,41 @@
 
 import React from 'react';
 import moment from 'moment';
-import { useEffect } from 'react';
+import { useEffect,useState } from 'react';
 import { useHistory } from '../../contexts/HistoryContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
-function DetailedLog({ name, amount, own, detailedExpense,detailedLogToggle,expense_id }) {
+
+
+function DetailedLog({ name, amount, own, detailedExpense,detailedLogToggle,expense_id,email }) {
   const history = useHistory();
-  useEffect(()=>{
-    console.log(detailedExpense)
-  })
+  const [deleteToggleBtn,setDeleteToggleBtn] = useState(false)
+  
+  const dateFormat = (d)=>{
+    const date = new Date(d)
+    const options = {
+      year : 'numeric',
+      month : 'long',
+      day : 'numeric',
+    }
+    return date.toLocaleDateString('en-US', options)
+  }
+
+  const deleteUserExpense = async ()=>{
+    const response = await fetch(`http://localhost:8080/deleteuserexpense/${email}`,{
+      method : 'DELETE',
+      headers :{
+        'Content-Type' : 'application/json'
+      },
+    })
+    if(!response.ok){
+      throw new Error(`HTTP error! status: ${response.status}`)
+    }
+    
+    history.updateChanges()
+
+  }
   return (
     <tr className="bg-gray-800 bg-opacity-50 backdrop-blur-sm text-white">
       <td colSpan="6" className="p-4">
@@ -25,7 +50,7 @@ function DetailedLog({ name, amount, own, detailedExpense,detailedLogToggle,expe
                   <FontAwesomeIcon icon={faCheckCircle} />
                 </button>
 
-              <button className="text-red-500 text-2xl p-3">
+              <button className="text-red-500 text-2xl p-3" onClick={deleteUserExpense}>
                   <FontAwesomeIcon icon={faTrashAlt} />
                 </button>
               </div>
@@ -52,7 +77,7 @@ function DetailedLog({ name, amount, own, detailedExpense,detailedLogToggle,expe
                       <div className="text-left">{expense.item}</div>
                       <div className="text-left">{expense.amount}</div>
                       <div className="text-left">{expense.action}</div>
-                      <div className="text-left">{expense.date}</div>
+                      <div className="text-left">{dateFormat(expense.date)}</div>
                       </>
                   ))
                 }

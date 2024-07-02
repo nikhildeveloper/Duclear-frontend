@@ -23,11 +23,7 @@ function Icon() {
     );
   }
   
-  // function crossBtn(){
-  //   return(
-  //     <button>X</button>
-  //   )
-  // }
+
 
 function SuccessAlert() {
   const [open, setOpen] = React.useState(true);

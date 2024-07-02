@@ -4,7 +4,9 @@ export const HistoryContext = React.createContext({
     historyItems : {
         expenseLogDB : [],
     },
-    toggleDetailedLog : (expenseid)=>{}
+    changes : null,
+    toggleDetailedLog : (expenseid)=>{},
+    updateChanges : ()=>{}
 
 })
 

@@ -21,11 +21,11 @@ function DateInput() {
 
   return (
   
-    <div className="col-span-6">
+    <div className="col-span-3">
       <Popover placement="bottom">
         <PopoverHandler>
           <Input
-            className="mt-1 w-full rounded-md border border-gray-200 bg-white text-lg text-gray-700 shadow-sm p-4"
+            className="mt-3 w-full rounded-md border border-gray-200 bg-white text-xl text-gray-700 shadow-sm p-6 "
             onChange={(e) => setDate(date)}
             value={date ? format(date, "PPP") : ""}
              

@@ -37,7 +37,7 @@ function UserLogDisplay() {
                     owe/owed
                   </th>
                   <th scope="col" class="px-6 py-3">
-                    Payment
+                    
                   </th>
 
 
@@ -50,18 +50,40 @@ function UserLogDisplay() {
               {
                 expenses.map((expense)=>{
 
-                    const detailedExpenses = expense.logs
-                    // console.log(detailedExpenses)
+                  const detailedExpenses = expense.logs
+                    const calculateAmountSpecified = ()=>{
+                      let givenAmount = 0;
+                      let takenAmount = 0;
+                      
+                      detailedExpenses.forEach((expense)=>{
+                        if(expense.action === "Given")
+                          {
+                            givenAmount += expense.amount
+                          }
+                          else{
+                            takenAmount += expense.amount
+                          }
+                      })
+                      const detailedAmount ={
+                        "givenAmount" : givenAmount,
+                        "takenAmount" : takenAmount,
+                      }
+                      
+                      return detailedAmount
+                    }
+   
+
                     if(expense.detailedLogToggle == false){
                         return <RowLog 
                          
                         
                         name ={expense.name} 
-                        amount = {200}
-                        own = {"own"}
+                        amount = {Math.abs(calculateAmountSpecified().givenAmount - calculateAmountSpecified().takenAmount)}       // here, why to put bracktes confused??
+                        own = {calculateAmountSpecified().givenAmount > calculateAmountSpecified().takenAmount ? "Owed" : "Own"}
                         detailedExpense = {detailedExpenses}
                         expense_id = {expense._id}
                         detailedLogToggle={expense.DetailLogToggle}
+                        email = {expense.email}
                         />
                     }
                     else{
@@ -69,19 +91,21 @@ function UserLogDisplay() {
                         return <>
                         <RowLog 
                          name ={expense.name} 
-                         amount = {200}
-                         own = {"own"}
+                         amount = {Math.abs(calculateAmountSpecified().givenAmount - calculateAmountSpecified().takenAmount)}       // here, why to put bracktes confused??
+                         own = {calculateAmountSpecified().givenAmount > calculateAmountSpecified().takenAmount ? "Owed" : "Own"}
                          expense_id = {expense._id}
                          detailedExpense = {detailedExpenses}
                        detailedLogToggle={expense.DetailLogToggle}
+                       email = {expense.email}
                         />
                         <DetailedLog
                         name ={expense.name} 
-                        amount = {200}
-                        own = {"own"}
+                        amount = {Math.abs(calculateAmountSpecified().givenAmount - calculateAmountSpecified().takenAmount)}       // here, why to put bracktes confused??
+                        own = {calculateAmountSpecified().givenAmount > calculateAmountSpecified().takenAmount ? "Owed" : "Own"}
                         detailedExpense = {detailedExpenses}
                         detailedLogToggle={expense.DetailLogToggle}
                         expense_id = {expense._id}
+                        email = {expense.email}
                         />
 
                         </>
