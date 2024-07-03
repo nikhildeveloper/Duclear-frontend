@@ -25,9 +25,9 @@ function DateInput() {
       <Popover placement="bottom">
         <PopoverHandler>
           <Input
-            className="mt-3 w-full rounded-md border border-gray-200 bg-white text-xl text-gray-700 shadow-sm p-6 "
+            className=" mt-1 w-full rounded-md border border-gray-200 bg-white text-lg text-gray-800 shadow-sm p-4"
             onChange={(e) => setDate(date)}
-            value={date ? format(date, "PPP") : ""}
+            value={dateUpdate.date ? format(dateUpdate.date, "PPP") : ""}
              
           
           />

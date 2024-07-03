@@ -18,6 +18,8 @@ function ExpenseInputForm() {
     const [emailAddress, setEmail] = useState("")
     const [alertToggle, setalertToggle] = useState(false)
     const [DB_data, setDB_data] = useState([])
+
+
     
 
     const storeFormInfo = (e)=>{
@@ -82,6 +84,8 @@ function ExpenseInputForm() {
             setAction("")
             setDate("")
             setEmail("")
+            storeDate("")
+            storeActionValue("Action")
         }
         const sendExpense = async ()=>{
             console.log('dbdata',DB_data)
@@ -225,7 +229,7 @@ function ExpenseInputForm() {
 
 
             <div class="col-span-3 ">
-                <label class="block text-lg font-medium text-gray-700">
+                <label class="block  text-lg font-medium text-gray-700 ">
                     Date
                 </label>
                 <DateInput/>

@@ -67,11 +67,12 @@ function RowLog({ name, amount, own, detailedExpense,detailedLogToggle,expense_i
                 {name}
             </th>
             <td className="px-6 py-4 dark:text-white">
-                {amount}
-            </td>
-            <td className="px-6 py-4 dark:text-white">
                 {own}
             </td>
+            <td className="px-6 py-4 dark:text-white">
+                {amount}
+            </td>
+
             <div className="flex justify-end gap-4 col-span-1 p-3 dark:text-white">
                 <input
                 type="number"

@@ -34,7 +34,7 @@ function UserLogDisplay() {
                       Amount
                   </th>
                   <th scope="col" class="px-6 py-3">
-                    owe/owed
+                    owe/own
                   </th>
                   <th scope="col" class="px-6 py-3">
                     
@@ -79,7 +79,7 @@ function UserLogDisplay() {
                         
                         name ={expense.name} 
                         amount = {Math.abs(calculateAmountSpecified().givenAmount - calculateAmountSpecified().takenAmount)}       // here, why to put bracktes confused??
-                        own = {calculateAmountSpecified().givenAmount > calculateAmountSpecified().takenAmount ? "Owed" : "Own"}
+                        own = {calculateAmountSpecified().givenAmount > calculateAmountSpecified().takenAmount ? "owe's" : "own"}
                         detailedExpense = {detailedExpenses}
                         expense_id = {expense._id}
                         detailedLogToggle={expense.DetailLogToggle}
@@ -92,7 +92,7 @@ function UserLogDisplay() {
                         <RowLog 
                          name ={expense.name} 
                          amount = {Math.abs(calculateAmountSpecified().givenAmount - calculateAmountSpecified().takenAmount)}       // here, why to put bracktes confused??
-                         own = {calculateAmountSpecified().givenAmount > calculateAmountSpecified().takenAmount ? "Owed" : "Own"}
+                         own = {calculateAmountSpecified().givenAmount > calculateAmountSpecified().takenAmount ? "owe's" : "own"}
                          expense_id = {expense._id}
                          detailedExpense = {detailedExpenses}
                        detailedLogToggle={expense.DetailLogToggle}
@@ -101,7 +101,7 @@ function UserLogDisplay() {
                         <DetailedLog
                         name ={expense.name} 
                         amount = {Math.abs(calculateAmountSpecified().givenAmount - calculateAmountSpecified().takenAmount)}       // here, why to put bracktes confused??
-                        own = {calculateAmountSpecified().givenAmount > calculateAmountSpecified().takenAmount ? "Owed" : "Own"}
+                        own = {calculateAmountSpecified().givenAmount > calculateAmountSpecified().takenAmount ? "owe's" : "own"}
                         detailedExpense = {detailedExpenses}
                         detailedLogToggle={expense.DetailLogToggle}
                         expense_id = {expense._id}
